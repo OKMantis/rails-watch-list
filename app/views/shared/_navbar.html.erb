@@ -1,8 +1,12 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
-    <a class="navbar-brand" href="#">Movie App</a>
+    <%= link_to "Movie App", lists_path, class: "navbar-brand" %>
     <div class="">
-      <%= link_to "Create new list", new_list_path, class: "btn btn-primary" %>
+      <% if current_page?(lists_path) %>
+        <%= link_to "Create new list", new_list_path, class: "btn btn-primary" %>
+      <% elsif current_page?(list_path(@list)) %>
+        <%= link_to "Add movie to list", new_list_bookmark_path(@list), class: "btn btn-primary" %>  
+      <% end %>
     </div>
   </div>
 </nav>
