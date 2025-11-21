@@ -5,19 +5,20 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" style="margin-top: 2rem;">
   <div class="row row-cols-1 row-cols-md-2 g-4">
     <% @lists.each do |list| %>
       <div class="col">
-        <%= link_to list_path(list) do %>
+        <%= link_to list_path(list), class: "text-decoration-none text-white" do %>
           <div class="card text-bg-dark">
-            <% if list.movies.any? %>
-              <%= image_tag list.movies.first.poster_url, class:"card-img poster", alt: "" %>
+            <% if list.photo.key %>
+              <%= cl_image_tag list.photo.key, class:"card-img poster", alt: "" %>
             <% else %>
               <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img poster" alt="...">
             <% end %>
-            <div class="card-img-overlay">
+            <div class="card-img-overlay d-flex justify-content-between align-items-start">
               <h5 class="card-title"><%= list.name %></h5>
+              <%= link_to "Delete", list_path(list), class: "btn btn-danger text-white", data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
             </div>
           </div>
         <% end %>
