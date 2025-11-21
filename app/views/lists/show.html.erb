@@ -10,6 +10,10 @@
             <h5 class="card-title"><%= movie.title %></h5>
             <p class="card-text"><%= movie.overview %></p>
             <p class="card-text"><%= movie.rating %></p>
+            <p class="card-text fst-italic">"<%= movie.bookmarks.map(&:comment).join %>"</p>
+            <%= link_to "Delete bookmark", bookmark_path(Bookmark.find_by(movie: movie, list: @list)), class: "btn btn-danger text-white", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+            <%# Alternative %>
+            <%#= link_to "Delete bookmark", bookmark_path(movie.bookmarks.find_by(list: @list)), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> 
           </div>
         </div>
       </div>
